@@ -3,20 +3,23 @@
 <button (click)="toggleIsAddUserOpen()">Add user</button>
 
 <div *ngIf="isAddUserOpen">
+
+<!-- <form #myForm="ngForm" novalidate (ngSubmit)="addUser()"> -->
     <div>
-        <input type="text" [(ngModel)]="userName" #name="ngModel"  required pattern="^[a-zA-Z]{2,15}$">
+        <input type="text" [(ngModel)]="userName" #name="ngModel" required pattern="^[a-zA-Z]{2,15}$">
         <div class="error" *ngIf="name.invalid && name.dirty">
             Name is invalid
         </div>
     </div>
-    
+
     <input type="email" [(ngModel)]="userEmail" required>
     <input type="phones" [(ngModel)]="userPhones" required>
-    <button (click)="addUser()">Add</button>
+
+    <button type="submit" (click)="addUser()">Add</button>
+<!-- </form> -->
+
 </div>
 
 <div *ngFor="let user of usersList">
-    <h3>{{ user.name }}</h3>
-    <div>{{ user.email }}</div>
-    <div>{{ user.phones.join(', ') }}</div>
+    <app-user-single [user]="user"></app-user-single>
 </div>
